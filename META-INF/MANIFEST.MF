@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core Utils
-Bundle-SymbolicName: net.kenevans.core.utils
+Bundle-SymbolicName: net.kenevans.rcp.core.utils
 Bundle-Version: 1.0.0.0
 Bundle-Activator: net.kenevans.core.utils.plugin.Activator
 Bundle-Vendor: kenevans.net
