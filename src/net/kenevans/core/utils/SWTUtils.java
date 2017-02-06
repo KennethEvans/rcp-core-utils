@@ -60,6 +60,22 @@ import org.osgi.framework.Bundle;
 
 public class SWTUtils
 {
+    /**
+     * Get the extension of a file (without the dot).
+     * 
+     * @param file
+     * @return
+     */
+    public static String getExtension(File file) {
+        String ext = null;
+        String s = file.getName();
+        int i = s.lastIndexOf('.');
+        if(i > 0 && i < s.length() - 1) {
+            ext = s.substring(i + 1).toLowerCase();
+        }
+        return ext;
+    }
+
     public static final String LS = System.getProperty("line.separator");
 
     /**
@@ -234,7 +250,8 @@ public class SWTUtils
      *            is added.
      * @param ex
      */
-    public static void excMsg(final Shell shell, final String msg, Throwable t) {
+    public static void excMsg(final Shell shell, final String msg,
+        Throwable t) {
         String fullMsg = msg + LS + LS + "Exception: " + t + LS + "Message: "
             + t.getMessage();
         MessageDialog.openError(shell, "Exception", fullMsg);
@@ -319,8 +336,8 @@ public class SWTUtils
         final Throwable t) {
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
-                ExceptionMessageDialog
-                    .openException(shell, "Exception", msg, t);
+                ExceptionMessageDialog.openException(shell, "Exception", msg,
+                    t);
             }
         });
     }
@@ -554,13 +571,14 @@ public class SWTUtils
                 palette.greenMask, palette.blueMask);
             BufferedImage bufferedImage = new BufferedImage(colorModel,
                 colorModel.createCompatibleWritableRaster(data.width,
-                    data.height), false, null);
+                    data.height),
+                false, null);
             for(int y = 0; y < data.height; y++) {
                 for(int x = 0; x < data.width; x++) {
                     int pixel = data.getPixel(x, y);
                     RGB rgb = palette.getRGB(pixel);
-                    bufferedImage.setRGB(x, y, rgb.red << 16 | rgb.green << 8
-                        | rgb.blue);
+                    bufferedImage.setRGB(x, y,
+                        rgb.red << 16 | rgb.green << 8 | rgb.blue);
                 }
             }
             return bufferedImage;
@@ -584,7 +602,8 @@ public class SWTUtils
             }
             BufferedImage bufferedImage = new BufferedImage(colorModel,
                 colorModel.createCompatibleWritableRaster(data.width,
-                    data.height), false, null);
+                    data.height),
+                false, null);
             WritableRaster raster = bufferedImage.getRaster();
             int[] pixelArray = new int[1];
             for(int y = 0; y < data.height; y++) {
@@ -816,8 +835,8 @@ public class SWTUtils
             return false;
         }
         try {
-            IFileStore fileStore = EFS.getLocalFileSystem().getStore(
-                file.toURI());
+            IFileStore fileStore = EFS.getLocalFileSystem()
+                .getStore(file.toURI());
             IWorkbenchPage page = PlatformUI.getWorkbench()
                 .getActiveWorkbenchWindow().getActivePage();
 
